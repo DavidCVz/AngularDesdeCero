@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { GifsService } from 'src/app/gifs/services/gifs.service';
 
 @Component({
   selector: 'shared-sidebar',
@@ -7,4 +8,11 @@ import { Component } from '@angular/core';
 })
 export class SidebarComponent {
 
+  // Inyeccion de servicio
+  constructor(private gifsService: GifsService){}
+
+  // Getter personalizado que devuelve el hisotorial de busqueda del usuario
+  get tagsHistory(): string[]{
+    return this.gifsService.tagsHistory;
+  }
 }

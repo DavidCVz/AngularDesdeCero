@@ -3,7 +3,8 @@
   <hr class="text-white">
 
   <ul class="list-group list-reset">
-    <button class="list-group-item list-group-item-action">Name Gif X</button>
+    <button class="list-group-item list-group-item-action"
+      *ngFor="let tag of tagsHistory">{{ tag | titlecase }}</button>
   </ul>
 
 </div>
