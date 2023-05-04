@@ -1,0 +1,17 @@
+<h4>Agregar personaje</h4>
+  <form class="row" (ngSubmit)="emitCharacter()">
+    <!-- El atributo [(ngModel)] es un tipo de enlazamiento de dos vias
+    Two Way Binding que permite enlazar los atributos de un componente
+    con los elementos HTML, para el caso de los input, hay que asignar
+    un nombre-->
+    <input type="text" class="form-control mb-2" placeholder="Nombre"
+      name="name" [(ngModel)]="character.name">
+    <input type="number" class="form-control mb-2" placeholder="Poder"
+      name="power" [(ngModel)]="character.power">
+    <button type="submit" class="btn btn-primary">
+      Agregar
+    </button>
+    <!-- | json es un Pipe que permite repesntar un objeto con una esctuctura
+    a traves de la etiqueta <pre> de bootstrap -->
+    <pre>{{character | json}}</pre>
+  </form>

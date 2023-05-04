@@ -1,0 +1,19 @@
+<h1>DBZ Main page</h1>
+<hr>
+<div class="row">
+  <div class="col">
+    <!-- La definicion: [characterList]="characters" indica
+    que se esta enviando la variable 'characters', como argumento
+    al atributo 'characterList'de un componente hijo-->
+    <dbz-list [characterList]="characters"
+      (OnDelete)="onDeleteCharacter($event)"></dbz-list>
+  </div>
+  <div class="col">
+    <dbz-add-character (onNewCharacter)="onNewCharacter($event)"></dbz-add-character>
+  </div>
+</div>
+
+<!-- EJEMPLO DE INPUT Y OUTPUT -->
+<div class="container">
+  <app-padre></app-padre>
+</div>
