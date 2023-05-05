@@ -4,7 +4,12 @@
 
   <ul class="list-group list-reset">
     <button class="list-group-item list-group-item-action"
-      *ngFor="let tag of tagsHistory">{{ tag | titlecase }}</button>
+      *ngFor="let tag of tagsHistory"
+      (click)="selectedTag(tag)"
+      >
+
+      {{ tag | titlecase }}
+    </button>
   </ul>
 
 </div>
