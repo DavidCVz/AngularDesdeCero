@@ -1,0 +1,38 @@
+<h2>Paises</h2>
+
+<ul class="list-group">
+
+  <!-- DESCRIPCION DE ATRIBUTOS SOBRE LOS LIST ITEMS:
+    'routerLink': Tomara el valor 'string' de la ruta que se le defina, cuando esta sea
+      activada, llamará al componente asociado a dicha ruta
+
+    'routerLinkActive': Permite definir una clase a un componente cuando el usuario
+      se encuentra sobre una ruta en la URL --- https://angular.io/api/router/RouterLinkActive
+
+    '[routerLinkActiveOptions]': Es una de las propiedades contenidas en RouterLinkActive, define
+      que para su activacion, la ruta debe de ser exactamente igual a una de las rutas definidas,
+      cualquier otra cosa que no cumpla sintacticamente con ella, no se aplicaran las definiciones para dicho elemento
+      https://angular.io/api/router/RouterLinkActive
+  -->
+  <li
+    routerLink="home"
+    routerLinkActive="active"
+    [routerLinkActiveOptions]="{ exact: true }"
+    class="list-group-item"
+    >
+    Home Page
+  </li>
+  <li
+    routerLink="about"
+    routerLinkActive="active"
+    class="list-group-item">
+    About Page
+  </li>
+  <li
+    routerLink="contact"
+    routerLinkActive="active"
+    class="list-group-item">
+    Contact Page
+  </li>
+
+</ul>
