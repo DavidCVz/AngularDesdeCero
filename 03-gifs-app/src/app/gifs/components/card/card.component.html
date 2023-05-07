@@ -1,13 +1,20 @@
-<div class="card mb-2 text-center bg-dark">
+<div class="card mb-2 text-center bg-dark text-center">
+
+  <!-- Componente que gestiona el comportamiendo de carga del GIF -->
+  <shared-lazy-image
+    [url]="gif.images.downsized_medium.url"
+    [alt]="gif.title || 'No name'"
+    >
+  </shared-lazy-image>
 
   <!-- Binding del atributo 'img' con el valor del objeto 'gif' -->
-  <img class="card-img-top"
+  <!-- <img class="card-img-top"
     [src]="gif.images.downsized_medium.url"
-    [alt]="gif.title">
+    [alt]="gif.title"> -->
 
   <div class="card-body text-white">
     <p class="card-text">
-      {{gif.title}}
+      {{gif.title || 'No title'}}
     </p>
   </div>
 </div>

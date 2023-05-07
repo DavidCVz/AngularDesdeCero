@@ -1,0 +1,18 @@
+
+<div class="d-flex justify-content-center">
+
+  <!-- El evento '(load)' se ejecuta cuando un elemento IMG finaliza la carga del render de la imagen -->
+  <!-- 'animate__animated' recurso de animaciones CSS https://animate.style/ -->
+  <img [src]="url"
+    class="card-img-top animate__animated animate__fadeIn"
+    [alt]="alt"
+    (load)="imgLoaded()"
+    [ngStyle]="{ display: isLoaded ? '' : 'none' }"
+  />
+
+  <!-- Si la imagen no ha sido cargada, se mostrará el loader` -->
+  <img *ngIf="!isLoaded"
+    src="assets/loader-1.svg"
+    height="35" width="35"
+    class="mt-3">
+</div>
