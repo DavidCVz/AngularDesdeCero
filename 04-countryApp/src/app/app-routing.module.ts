@@ -21,8 +21,18 @@ const routes: Routes = [
     component: ContactPageComponent
   },
   {
+    path: 'countries', // Ruta que utilizara las rutas hijas del modulo 'countries'
+
+    /** Por medio de una promesa se obtiene el modulo que contiene las definiciones
+     * de las rutas hijas del modulo 'countries' de manera perezosa (solo cuando un usuario lo necesita).
+     *  'import('./countries/countries.module')': Es la ruta o path estatica donde se encuentra el modulo
+     *  'then( m => m.CountriesModule)'
+     */
+    loadChildren: () => import('./countries/countries.module').then( m => m.CountriesModule)
+  },
+  {
     path: '**', // Si se intenta acceder a la URL raiz
-    redirectTo: 'home' // Redireccionará a la ruta home
+    redirectTo: 'countries/by-capital' // Redireccionará a la ruta especificada
   }
 ];
 
