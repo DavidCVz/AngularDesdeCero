@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, catchError, map, of } from 'rxjs';
+import { Observable, catchError, map, of, pipe } from 'rxjs';
 import { Country } from '../interfaces/country';
 
 @Injectable({providedIn: 'root'})
@@ -10,33 +10,31 @@ export class CountriesService {
 
   constructor(private http: HttpClient) { }
 
-  searchCapital(termn: string): Observable<Country[]>{
-    const url:string = `${ this.apiURL }/capital/${termn}`;
-
+  private getCountriesRequest(url: string): Observable<Country[]>{
     // La consulta get retorna un arreglo de Country
-    return this.http.get<Country[]>( url )
+    return this.http.get<Country[]>(url)
       .pipe( // Sirve para especificar diferentes operadores de RXJS
         // Es un operador que que permite atrapaer errores y procesarlos
-        catchError( error => of([])) // 'of' construye y regresa un nuevo Observable vacio
+        catchError( () => of([]) ), // 'of' construye y regresa un nuevo Observable vacio
       );
+  }
+
+  searchCapital(term: string): Observable<Country[]>{
+    const url:string = `${ this.apiURL }/capital/${term}`;
+
+    return this.getCountriesRequest(url);
   }
 
   searchCountry(term: string): Observable<Country[]>{
     const url:string = `${ this.apiURL }/name/${term}`;
 
-    return this.http.get<Country[]>( url )
-      .pipe(
-        catchError( error => of([]))
-      );
+    return this.getCountriesRequest(url);
   }
 
   searchRegion(region: string): Observable<Country[]>{
     const url:string = `${ this.apiURL }/region/${region}`;
 
-    return this.http.get<Country[]>( url )
-      .pipe(
-        catchError( error => of([]))
-      );
+    return this.getCountriesRequest(url);
   }
 
   searchCountryByAlphaCode( code: string ): Observable<Country | null>{
