@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Country } from '../../interfaces/country';
 import { CountriesService } from '../../services/countries.service';
 import { Region, RegionMapping } from '../../enums/region';
@@ -10,7 +10,7 @@ import { Region, RegionMapping } from '../../enums/region';
   ]
 })
 
-export class ByRegionComponent {
+export class ByRegionComponent implements OnInit {
 
   public countries: Country[] = [];
   public regionMapping: any = RegionMapping;
@@ -18,6 +18,11 @@ export class ByRegionComponent {
   public selectedRegion?: any;
 
   constructor(private countriesService: CountriesService){}
+
+  ngOnInit(): void {
+    this.selectedRegion = this.countriesService.cacheStorage.byRegion.region;
+    this.countries = this.countriesService.cacheStorage.byRegion.countries;
+  }
 
   searchByRegion(region: any):void{
     this.selectedRegion = region;
