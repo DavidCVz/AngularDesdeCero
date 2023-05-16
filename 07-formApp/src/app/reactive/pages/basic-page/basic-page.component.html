@@ -12,7 +12,7 @@
             <div class="mb-3 row">
                 <label class="col-sm-3 col-form-label">Producto</label>
                 <div class="col-sm-9">
-                  <!-- Para enlazar las validaciones, se debe deespecificar dentro del
+                  <!-- Para enlazar las validaciones, se debe de especificar dentro del
                   elemento la propiedad 'formControlName' con el nombre de la
                   propiedad de validacion definida -->
                     <input formControlName="name"
@@ -20,9 +20,17 @@
                            class="form-control"
                            placeholder="Nombre del producto">
 
-                    <span class="form-text text-danger">
-                        <!-- Debe de ser de 3 letras -->
-                        error message
+                    <!-- FORMA 1. Para controlar los mensajes de error en los formularios
+                     (de manera empirica y no tan optima) se puede utilizar un ngIf para
+                      que se muestre cierto error en caso de que exista un error o se cumpla
+                      el estado de alguna valdacion:
+                      *ngIf="myForm.controls['name'].getError('required') && myForm.controls['name'].touched"
+                    -->
+                    <!-- FORMA 2. Usando un metodo que haga las validaciones a partir del nombre -->
+                    <span *ngIf="isValidField('name')"
+                      class="form-text text-danger">
+                        <!-- Es requerido -->
+                        {{ getFieldError('name')}}
                     </span>
                 </div>
             </div>
@@ -35,7 +43,8 @@
                            type="number"
                            class="form-control"
                            placeholder="Precio del producto">
-                    <span class="form-text text-danger">
+                    <span *ngIf="isValidField('price')"
+                          class="form-text text-danger">
                         El precio debe de ser 0 o mayor
                     </span>
                 </div>
@@ -50,7 +59,8 @@
                            class="form-control"
                            placeholder="Existencias del producto">
 
-                    <span class="form-text text-danger">
+                    <span *ngIf="isValidField('inStorage')"
+                          class="form-text text-danger">
                          Las existencias deben de ser 0 o mayor
                     </span>
                 </div>
@@ -80,8 +90,8 @@
     <div class="col">
 
         <!-- 'Valid' indica si el elemento ha o no cumplido con todas las validaciones
-        del form control (formBuilder), si las validaciones no se cumplen, entonces
-        no se ejecutará el 'submit' del formulario-->
+        del form control (formBuilder), su contraparte es la propiedad 'invalid'
+        luego de hacer un submit se recibira la informacion cual sea el caso-->
         <span>Valid</span>
         <pre>{{ myForm.valid| json }}</pre>
 
@@ -111,7 +121,7 @@
 
         <!-- La propiedad 'errors' de un elemento existente en el formulario
         contendrá el estado de las validaciones del elemento.
-        Si un elemento no contiene errores entonces será 'null'
+        Si un elemento no contiene errores entonces 'errors' entonces será 'null'
         De lo contrario devolvera las definiciones o reglas que no se estan cumpliendo -->
         <span>Precio</span>
         <pre>{{ myForm.controls['price'].errors | json }}</pre>
