@@ -1,0 +1,125 @@
+<h2>Reactivos: Básicos</h2>
+<hr>
+
+<div class="row">
+    <div class="col">
+
+      <!-- 'autocomplete="off"' Deshabilita las validaciones que vienen con el navegador
+        [formGroup] enlaza el formulario con el objeto 'myForm' creado-->
+        <form [formGroup]="myForm" (ngSubmit)="onSave()" autocomplete="off">
+
+            <!-- Campo de producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Producto</label>
+                <div class="col-sm-9">
+                  <!-- Para enlazar las validaciones, se debe deespecificar dentro del
+                  elemento la propiedad 'formControlName' con el nombre de la
+                  propiedad de validacion definida -->
+                    <input formControlName="name"
+                           type="text"
+                           class="form-control"
+                           placeholder="Nombre del producto">
+
+                    <span class="form-text text-danger">
+                        <!-- Debe de ser de 3 letras -->
+                        error message
+                    </span>
+                </div>
+            </div>
+
+            <!-- Campo de producto -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Precio</label>
+                <div class="col-sm-9">
+                    <input formControlName="price"
+                           type="number"
+                           class="form-control"
+                           placeholder="Precio del producto">
+                    <span class="form-text text-danger">
+                        El precio debe de ser 0 o mayor
+                    </span>
+                </div>
+            </div>
+
+            <!-- Campo de existencias -->
+            <div class="mb-3 row">
+                <label class="col-sm-3 col-form-label">Existencias</label>
+                <div class="col-sm-9">
+                    <input formControlName="inStorage"
+                           type="number"
+                           class="form-control"
+                           placeholder="Existencias del producto">
+
+                    <span class="form-text text-danger">
+                         Las existencias deben de ser 0 o mayor
+                    </span>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col">
+                    <button type="submit"
+                            class="btn btn-primary float-end">
+                        Guardar
+                    </button>
+                </div>
+            </div>
+
+
+
+        </form>
+
+    </div>
+</div>
+
+
+
+
+<div class="row">
+    <div class="col">
+
+        <!-- 'Valid' indica si el elemento ha o no cumplido con todas las validaciones
+        del form control (formBuilder), si las validaciones no se cumplen, entonces
+        no se ejecutará el 'submit' del formulario-->
+        <span>Valid</span>
+        <pre>{{ myForm.valid| json }}</pre>
+
+        <!-- 'Pristine' indica si cualquier campo o elemento del formulario ya ha
+        sido manipulado por el usuario, esto es que el usuario ya haya ingresado
+        algun dato en un Input o cambiado el estado de un checkbox, etc.-->
+        <span>Pristine</span>
+        <pre>{{ myForm.pristine| json }}</pre>
+
+        <!-- 'Touch' indica el momento en el que el usuario quita el focus de algun
+        elemento del formulario, esto es, cambiar de un campo a otro o
+        hacer click fuera del mismo   -->
+        <span>Touched</span>
+        <pre>{{ myForm.touched | json }}</pre>
+
+        <!-- 'value' contiene TODOS los valores del formulario html, Nota:
+        si un elemento del formulario no contiene la definicion 'formControlName'
+        entonces no se podrá obtener el valor que ingrese el usuario por medio
+        de la propiedad 'myForm.value'  -->
+        <span>Value</span>
+        <pre>{{ myForm.value | json }}</pre>
+
+        <!-- La propiedad 'value' de un elemento existente en el formulario
+        devolvera el valor definido o seleccionado por el usuario -->
+        <span>Precio</span>
+        <pre>{{ myForm.controls['price'].value | json }}</pre>
+
+        <!-- La propiedad 'errors' de un elemento existente en el formulario
+        contendrá el estado de las validaciones del elemento.
+        Si un elemento no contiene errores entonces será 'null'
+        De lo contrario devolvera las definiciones o reglas que no se estan cumpliendo -->
+        <span>Precio</span>
+        <pre>{{ myForm.controls['price'].errors | json }}</pre>
+
+        <span>Producto</span>
+        <pre>{{ myForm.controls['name'].value | json }}</pre>
+
+        <span>Producto</span>
+        <pre>{{ myForm.controls['name'].errors | json }}</pre>
+    </div>
+</div>
